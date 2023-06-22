@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post {
+struct PostHeader {
     
     var title: String
 }

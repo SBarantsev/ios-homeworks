@@ -9,56 +9,141 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private var profileHeaderView: ProfileHeaderView = {
-      
-        let headerView = ProfileHeaderView()
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return headerView
-    }()
+    // MARK: - Data
     
-    private lazy var titleButton: UIButton = {
-
-        let button = UIButton()
-
-        button.setTitle("Change title", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .systemMint
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressTitleButton), for: .touchUpInside)
-        
-        return button
-    }()
+    fileprivate let data = Post.make()
     
-    @objc private func pressTitleButton () {
-        title = profileHeaderView.nameLabel.text
+    // MARK: - Subviews
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView.init(
+            frame: .zero,
+            style: .grouped
+        )
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+    }()
+
+    private enum CellReuseID: String {
+        case base = "BaseTableViewCell_ReuseID"
     }
+    
+    private enum HeaderFooterReuseID: String {
+        case base = "TableSectionFooterHeaderView_ReuseID"
+    }
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        view.addSubview(profileHeaderView)
-        view.addSubview(titleButton)
-        viewConstraints()
+        
+        setupView()
+        addSubviews()
+        setupConstraints()
+        tuneTableView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    // MARK: - Private
+    
+    private func setupView() {
+        view.backgroundColor = .white
+        navigationItem.title = "TableView example"
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-     private func viewConstraints() {
+    private func addSubviews() {
+        view.addSubview(tableView)
+    }
+    
+    private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
-         NSLayoutConstraint.activate([
-            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            profileHeaderView.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor),
-            profileHeaderView.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor),
-            profileHeaderView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+        NSLayoutConstraint.activate([
             
-            titleButton.heightAnchor.constraint(equalToConstant: 40),
-            titleButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            titleButton.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor),
-            titleButton.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor)
-                ])
-            }
+            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
+        ])
+    }
+    
+    private func tuneTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44.0
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+        }
+        
+        tableView.register(
+            BaseTableViewCell.self,
+            forCellReuseIdentifier: CellReuseID.base.rawValue
+        )
+        
+        tableView.register(
+            ProfileHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: HeaderFooterReuseID.base.rawValue
+        )
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    
+    func numberOfSections(
+        in tableView: UITableView
+    ) -> Int {
+        1
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        data.count
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CellReuseID.base.rawValue,
+            for: indexPath
+        ) as? BaseTableViewCell else {
+            fatalError("could not dequeueReusableCell")
+        }
+        
+        cell.accessoryType = .none
+        cell.update(data[indexPath.row])
+        
+        return cell
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+//        UITableView.automaticDimension
+        250
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        viewForHeaderInSection section: Int
+    ) -> UIView? {
+        
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderFooterReuseID.base.rawValue
+        ) as? ProfileHeaderView else {
+            fatalError("could not dequeueReusableCell")
+        }
+        
+        return headerView
+    }
 }

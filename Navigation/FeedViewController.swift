@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post = Post(title: "New post")
+    private var post = PostHeader(title: "New post")
     
     private lazy var actionButton1: UIButton = {
        
