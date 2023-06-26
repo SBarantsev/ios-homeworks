@@ -5,15 +5,14 @@
 //  Created by Sergey on 20.05.2023.
 //
 
-import Foundation
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
     
-    private var statusText: String
+    private var statusText: String = ""
     
     private let photoImageView: UIImageView = {
-
+        
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,10 +26,10 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-      let nameLabel: UILabel = {
-
+    let nameLabel: UILabel = {
+        
         let label = UILabel()
-          
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Happy Giraffe"
         label.font = .boldSystemFont(ofSize: 18)
@@ -38,9 +37,9 @@ class ProfileHeaderView: UIView {
         
         return label
     }()
-
+    
     private let statusViews: UITextField = {
-
+        
         let status = UITextField()
         
         status.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +51,7 @@ class ProfileHeaderView: UIView {
     }()
     
     private lazy var enterStatusViews: UITextField = {
-
+        
         let enterStatus = UITextField()
         
         enterStatus.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +85,7 @@ class ProfileHeaderView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
         
-       return button
+        return button
     }()
     
     @objc private func pressButton (){
@@ -97,10 +96,11 @@ class ProfileHeaderView: UIView {
     @objc private func statusTextChange(_ textField: UITextField) {
         self.statusText = enterStatusViews.text!
     }
-    
-    override init(frame: CGRect) {
+        
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
         self.statusText = "Waiting for something..."
-        super.init(frame: frame)
         setupUI()
         setupConstraints()
     }
@@ -118,14 +118,14 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupConstraints() {
-
+        
         NSLayoutConstraint.activate([
-
+            
             photoImageView.heightAnchor.constraint(equalToConstant: 120),
             photoImageView.widthAnchor.constraint(equalToConstant: 120),
             photoImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-
+            
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             nameLabel.heightAnchor.constraint(equalToConstant: 18),
             nameLabel.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
