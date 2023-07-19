@@ -1,13 +1,13 @@
 //
-//  ProfileHeaderView.swift
+//  HeaderTableView.swift
 //  Navigation
 //
-//  Created by Sergey on 20.05.2023.
+//  Created by Sergey on 11.07.2023.
 //
 
 import UIKit
 
-class ProfileHeaderView: UITableViewHeaderFooterView {
+class HeaderTableVIew: UIView {
     
     private var statusText: String = ""
     
@@ -96,9 +96,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     @objc private func statusTextChange(_ textField: UITextField) {
         self.statusText = enterStatusViews.text!
     }
-        
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         self.statusText = "Waiting for something..."
         setupUI()
@@ -135,6 +135,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             statusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             statusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             statusButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 50),
+            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             
             statusViews.bottomAnchor.constraint(equalTo: enterStatusViews.topAnchor, constant: -16),
             statusViews.heightAnchor.constraint(equalToConstant: 14),
@@ -148,3 +149,4 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         ])
     }
 }
+

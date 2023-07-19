@@ -24,14 +24,16 @@ class ProfileViewController: UIViewController {
         
         return tableView
     }()
-
+    
     private enum CellReuseID: String {
         case base = "BaseTableViewCell_ReuseID"
+        case custom = "CustomTableViewCell_ReuseID"
     }
     
     private enum HeaderFooterReuseID: String {
         case base = "TableSectionFooterHeaderView_ReuseID"
     }
+    
     
     // MARK: - Lifecycle
     
@@ -44,11 +46,15 @@ class ProfileViewController: UIViewController {
         tuneTableView()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     // MARK: - Private
     
     private func setupView() {
-        view.backgroundColor = .white
-        navigationItem.title = "TableView example"
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
@@ -69,6 +75,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func tuneTableView() {
+        
+        let headerTableView = HeaderTableVIew()
+        tableView.setAndLayout(headerView: headerTableView)
+        tableView.tableFooterView = UIView()
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0
         if #available(iOS 15.0, *) {
@@ -81,8 +92,8 @@ class ProfileViewController: UIViewController {
         )
         
         tableView.register(
-            ProfileHeaderView.self,
-            forHeaderFooterViewReuseIdentifier: HeaderFooterReuseID.base.rawValue
+            PhotosTableViewCell.self,
+            forCellReuseIdentifier: CellReuseID.custom.rawValue
         )
         
         tableView.dataSource = self
@@ -90,19 +101,25 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - Extension
+
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(
         in tableView: UITableView
     ) -> Int {
-        1
+        2
     }
     
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        data.count
+        if section == 0 {
+            return 1
+        } else {
+            return data.count
+        }
     }
     
     func tableView(
@@ -110,17 +127,29 @@ extension ProfileViewController: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: CellReuseID.base.rawValue,
-            for: indexPath
-        ) as? BaseTableViewCell else {
-            fatalError("could not dequeueReusableCell")
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CellReuseID.custom.rawValue,
+                for: indexPath
+            ) as? PhotosTableViewCell else {
+                fatalError("could not dequeueReusableCell")
+            }
+            cell.accessoryType = .none
+            
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CellReuseID.base.rawValue,
+                for: indexPath
+            ) as? BaseTableViewCell else {
+                fatalError("could not dequeueReusableCell")
+            }
+            cell.accessoryType = .none
+            cell.update(data[indexPath.row])
+            
+            return cell
         }
-        
-        cell.accessoryType = .none
-        cell.update(data[indexPath.row])
-        
-        return cell
     }
 }
 
@@ -130,20 +159,27 @@ extension ProfileViewController: UITableViewDelegate {
         _ tableView: UITableView,
         heightForHeaderInSection section: Int
     ) -> CGFloat {
-//        UITableView.automaticDimension
-        250
+        UITableView.automaticDimension
     }
     
     func tableView(
         _ tableView: UITableView,
-        viewForHeaderInSection section: Int
-    ) -> UIView? {
-        
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderFooterReuseID.base.rawValue
-        ) as? ProfileHeaderView else {
-            fatalError("could not dequeueReusableCell")
-        }
-        
-        return headerView
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        if indexPath.section == 0 {
+            let nextViewController = PhotosViewController()
+            
+            navigationController?.pushViewController(
+                nextViewController,
+                animated: true
+            )
+        } else {return}
     }
 }

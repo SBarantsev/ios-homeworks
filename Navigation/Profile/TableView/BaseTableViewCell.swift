@@ -153,7 +153,6 @@ class BaseTableViewCell: UITableViewCell {
             views.widthAnchor.constraint(equalToConstant: 100),
             views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
-        
     }
     
     // MARK: - Public
