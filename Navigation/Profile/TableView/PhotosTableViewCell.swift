@@ -118,9 +118,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
     
     private func setupLayouts() {
-        
-        let width = contentView.bounds.width
-        
+                
         NSLayoutConstraint.activate([
             
             headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
@@ -128,7 +126,6 @@ class PhotosTableViewCell: UITableViewCell {
             
             symbolView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             symbolView.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
-            
             
             collectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),

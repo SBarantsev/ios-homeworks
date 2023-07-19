@@ -15,15 +15,15 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         static let horizontalPadding: CGFloat = 8.0
         static let profileDescriptionVerticalPadding: CGFloat = 8.0
     }
-
+    
     // MARK: - Subviews
     
     lazy var photoGalleryView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-
-       return imageView
+        
+        return imageView
     }()
     
     // MARK: - Lifecycle
@@ -44,7 +44,6 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         contentView.clipsToBounds = true
-        contentView.backgroundColor = .cyan
     }
     
     private func setupSubviews() {
