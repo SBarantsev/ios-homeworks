@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
@@ -143,7 +144,6 @@ extension ProfileViewController: UITableViewDataSource {
             }
             cell.accessoryType = .none
             
-            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
@@ -154,7 +154,7 @@ extension ProfileViewController: UITableViewDataSource {
             }
             cell.accessoryType = .none
             cell.update(data[indexPath.row])
-            
+ 
             return cell
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class HeaderTableVIew: UIView {
     
@@ -15,7 +16,6 @@ class HeaderTableVIew: UIView {
         
         let imageView = UIImageView()
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .systemBlue
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -30,7 +30,6 @@ class HeaderTableVIew: UIView {
         
         let label = UILabel()
         
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Happy Giraffe"
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
@@ -42,7 +41,6 @@ class HeaderTableVIew: UIView {
         
         let status = UITextField()
         
-        status.translatesAutoresizingMaskIntoConstraints = false
         status.text = "Waiting for something..."
         status.font = .systemFont(ofSize: 14)
         status.textColor = .gray
@@ -54,7 +52,6 @@ class HeaderTableVIew: UIView {
         
         let enterStatus = UITextField()
         
-        enterStatus.translatesAutoresizingMaskIntoConstraints = false
         enterStatus.backgroundColor = .white
         enterStatus.placeholder = statusText
         enterStatus.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: enterStatus.frame.height))
@@ -82,7 +79,6 @@ class HeaderTableVIew: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
         
         return button
@@ -119,34 +115,39 @@ class HeaderTableVIew: UIView {
     
     private func setupConstraints() {
         
-        NSLayoutConstraint.activate([
-            
-            photoImageView.heightAnchor.constraint(equalToConstant: 120),
-            photoImageView.widthAnchor.constraint(equalToConstant: 120),
-            photoImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            nameLabel.heightAnchor.constraint(equalToConstant: 18),
-            nameLabel.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
-            nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
-            statusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            statusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            statusButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 50),
-            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            
-            statusViews.bottomAnchor.constraint(equalTo: enterStatusViews.topAnchor, constant: -16),
-            statusViews.heightAnchor.constraint(equalToConstant: 14),
-            statusViews.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
-            statusViews.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
-            
-            enterStatusViews.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-            enterStatusViews.heightAnchor.constraint(equalToConstant: 40),
-            enterStatusViews.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
-            enterStatusViews.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-        ])
+        photoImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(120)
+            make.top.left.equalTo(16)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(27)
+            make.height.equalTo(18)
+            make.left.equalTo(photoImageView.snp_rightMargin).offset(20)
+            make.right.equalTo(-16)
+        }
+        
+        statusButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.right.equalTo(-16)
+            make.left.equalTo(16)
+            make.top.equalTo(photoImageView.snp_bottomMargin).offset(50)
+            make.bottom.equalTo(-16)
+        }
+        
+        statusViews.snp.makeConstraints { make in
+            make.height.equalTo(14)
+            make.left.equalTo(photoImageView.snp_rightMargin).offset(20)
+            make.right.equalTo(-8)
+            make.bottom.equalTo(enterStatusViews.snp_topMargin).offset(-16)
+        }
+        
+        enterStatusViews.snp.makeConstraints { make in
+            make.bottom.equalTo(statusButton.snp_topMargin).offset(-34)
+            make.height.equalTo(40)
+            make.left.equalTo(photoImageView.snp_rightMargin).offset(20)
+            make.right.equalTo(-16)
+        }
     }
 }
 

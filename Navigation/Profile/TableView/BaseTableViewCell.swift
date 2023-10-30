@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class BaseTableViewCell: UITableViewCell {
     
@@ -23,7 +24,7 @@ class BaseTableViewCell: UITableViewCell {
     }()
     
     private let newsImage: UIImageView = {
-
+        
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -122,7 +123,7 @@ class BaseTableViewCell: UITableViewCell {
         selectionStyle = .gray
         let selectedView = UIView()
         selectedView.backgroundColor = .systemGray
-
+        
         contentView.addSubview(headingNews)
         contentView.addSubview(newsImage)
         contentView.addSubview(descriptionNews)
@@ -164,5 +165,18 @@ class BaseTableViewCell: UITableViewCell {
         descriptionNews.text = model.description
         likes.text = "Likes: " + String(model.likes)
         views.text = "Views: " + String(model.views)
+        
+        let imageProcessor = ImageProcessor()
+        let sourceImage = newsImage.image
+        let completion: (UIImage?) -> Void = { processedImage in
+            if processedImage != nil {
+                let image = processedImage
+                self.newsImage.image = image
+            } else {
+                print("нет изображения")
+            }
+        }
+        
+        imageProcessor.processImage(sourceImage: sourceImage!, filter: ColorFilter.tonal, completion: completion)
     }
 }
