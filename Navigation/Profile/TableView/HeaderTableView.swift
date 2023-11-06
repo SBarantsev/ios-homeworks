@@ -148,5 +148,11 @@ class HeaderTableVIew: UIView {
             enterStatusViews.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
         ])
     }
+    
+    func update(user: User) {
+        nameLabel.text = user.userName
+        statusViews.text = user.status
+        photoImageView.image = user.avatar
+    }
 }
 
