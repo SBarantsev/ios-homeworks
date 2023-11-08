@@ -14,6 +14,17 @@ class ProfileViewController: UIViewController {
     
     fileprivate let data = Post.make()
     
+    private let user: User
+
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Subviews
     
     private lazy var tableView: UITableView = {
@@ -84,6 +95,7 @@ class ProfileViewController: UIViewController {
     private func tuneTableView() {
         
         let headerTableView = HeaderTableVIew()
+        headerTableView.update(user: user)
         tableView.setAndLayout(headerView: headerTableView)
         tableView.tableFooterView = UIView()
         
