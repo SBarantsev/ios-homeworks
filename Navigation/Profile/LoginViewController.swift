@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    var loginDelegate: LoginViewControllerDelegate?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         

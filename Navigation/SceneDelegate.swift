@@ -28,8 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         func createLoginViewController() -> UINavigationController {
-            
+            let loginInspector = LoginInspector()
             let loginViewController = LogInViewController()
+            loginViewController.loginDelegate = loginInspector
             loginViewController.title = "Профиль"
             loginViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
             return UINavigationController(rootViewController: loginViewController)
