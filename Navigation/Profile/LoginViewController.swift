@@ -9,12 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-
     var loginDelegate: LoginViewControllerDelegate?
-
+    
     private let currentUser = CurrenUserService()
     private let testUserServise = TestUserService()
-
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -129,25 +127,27 @@ class LogInViewController: UIViewController {
     
     @objc func pressButtonLogIn() {
         
-#if DEBUG
-        guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
-        
-#else
-        guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
+        guard let login = userInfo.text else {return}
+        guard let password = userPassword.text else {return}
+        if loginDelegate?.check(login: login, password: password) == true {
             
-            let alert = UIAlertController(title: "Attention", message: "User not found", preferredStyle: .alert)
-            present(alert, animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-                alert.dismiss(animated: true)
+#if DEBUG
+            guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
+            
+#else
+            guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
+                Alert.shared.showAlert(title: "Ошибка", massage: "Пользователь не найден", viewController: self)
+                return
             }
-            return
-        }
-        
+            
 #endif
-        
-        let profileViewController = ProfileViewController(user: user)
-        profileViewController.title = "Профиль"
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+            let profileViewController = ProfileViewController(user: user)
+            profileViewController.title = "Профиль"
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        }
+        else {
+            Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
+        }
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
