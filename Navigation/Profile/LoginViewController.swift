@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    private let currentUser = CurrenUserService()
+    private let testUserServise = TestUserService()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -26,12 +29,12 @@ class LogInViewController: UIViewController {
         
         contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return contentView
     }()
     
     private let logoImage: UIImageView = {
-       let logo = UIImageView()
+        let logo = UIImageView()
         
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.image = UIImage(named: "LogoVK")
@@ -45,6 +48,7 @@ class LogInViewController: UIViewController {
         userInfo.placeholder = "Email or phone"
         userInfo.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userInfo.frame.height))
         userInfo.leftViewMode = .always
+        userInfo.autocapitalizationType = .none
         userInfo.delegate = self
         
         return userInfo
@@ -58,6 +62,7 @@ class LogInViewController: UIViewController {
         userPassword.leftViewMode = .always
         userPassword.layer.borderWidth = 0.5
         userPassword.layer.borderColor = UIColor.lightGray.cgColor
+        userPassword.autocapitalizationType = .none
         userPassword.isSecureTextEntry = true
         userPassword.delegate = self
         
@@ -65,7 +70,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var stackView: UIStackView = { [unowned self] in
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.clipsToBounds = true
@@ -120,7 +125,23 @@ class LogInViewController: UIViewController {
     
     @objc func pressButtonLogIn() {
         
-        let profileViewController = ProfileViewController()
+#if DEBUG
+        guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
+        
+#else
+        guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
+            
+            let alert = UIAlertController(title: "Attention", message: "User not found", preferredStyle: .alert)
+            present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                alert.dismiss(animated: true)
+            }
+            return
+        }
+        
+#endif
+        
+        let profileViewController = ProfileViewController(user: user)
         profileViewController.title = "Профиль"
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
