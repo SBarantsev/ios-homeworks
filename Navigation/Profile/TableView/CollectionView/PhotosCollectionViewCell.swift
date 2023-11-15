@@ -61,9 +61,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
     // MARK: - Public
     
-    func setup(
-        with photo: PhotoGallery
-    ){
-        photoGalleryView.image = UIImage(named: photo.imageName)
+    func setup(with photo: UIImage){
+        photoGalleryView.image = photo
     }
 }

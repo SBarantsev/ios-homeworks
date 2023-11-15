@@ -9,6 +9,7 @@ import UIKit
 
 struct PhotoGallery {
     let imageName: String
+    let userPhotoAlbum: [UIImage] = []
 }
 
 extension PhotoGallery {
@@ -36,5 +37,18 @@ extension PhotoGallery {
             PhotoGallery(imageName: "photo_19"),
             PhotoGallery(imageName: "photo_20"),
         ]
+    }
+    
+    static func makeUserAlbum(from fileNames: [PhotoGallery]) -> [UIImage] {
+        var album = [UIImage]()
+        
+        for fileName in fileNames {
+            if let image = UIImage(named: fileName.imageName) {
+                album.append(image)
+            } else {
+                print("Image not found")
+            }
+        }
+        return album
     }
 }

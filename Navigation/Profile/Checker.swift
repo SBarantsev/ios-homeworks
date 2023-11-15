@@ -17,17 +17,13 @@ final class Checker {
     private init() {}
     
     func chek(log: String, pass: String) -> Bool {
-        
-        if  log == login && pass == password {
-            return true
-        } else {return false}
+        log == login && pass == password
     }
 }
 
 protocol LoginViewControllerDelegate {
     func check(login: String, password: String) -> Bool
 }
-
 
 struct LoginInspector: LoginViewControllerDelegate {
     func check(login: String, password: String) -> Bool {

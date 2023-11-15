@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    let imagePublisherFasade = ImagePublisherFacade()
+    var newPhoto: [UIImage] = []
+    
     fileprivate lazy var photos: [PhotoGallery] = PhotoGallery.make()
+    var userPhotoAlbum = PhotoGallery.makeUserAlbum(from: PhotoGallery.make())
     
     private enum CellReuseID: String {
         case photoGalleryCell = "PhotoGalleryViewCell_ReuseID"
@@ -43,6 +48,20 @@ class PhotosViewController: UIViewController {
         setupView()
         setupSubviews()
         setupLayouts()
+        
+        imagePublisherFasade.subscribe(self)
+        imagePublisherFasade.addImagesWithTimer(
+            time: 0.5,
+            repeat: 20,
+            userImages: userPhotoAlbum
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        imagePublisherFasade.removeSubscription(for: self)
+        print("Подписка отменена")
     }
     
     // MARK: - Private
@@ -84,7 +103,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        photos.count
+        newPhoto.count
     }
     
     func collectionView(
@@ -95,7 +114,7 @@ extension PhotosViewController: UICollectionViewDataSource {
             withReuseIdentifier: CellReuseID.photoGalleryCell.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
         
-        let photo = photos[indexPath.row]
+        let photo = newPhoto[indexPath.row]
         cell.setup(with: photo)
         cell.photoGalleryView.clipsToBounds = false
         
@@ -158,5 +177,15 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         LayoutConstant.spacing
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        for image in images {
+            imagePublisherFasade.rechargeImageLibrary()
+            newPhoto.append(image)
+        }
+        collectionView.reloadData()
     }
 }

@@ -48,6 +48,7 @@ class LogInViewController: UIViewController {
         let userInfo = UITextField()
         
         userInfo.placeholder = "Email or phone"
+        userInfo.text = "cat"
         userInfo.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userInfo.frame.height))
         userInfo.leftViewMode = .always
         userInfo.autocapitalizationType = .none
@@ -60,6 +61,7 @@ class LogInViewController: UIViewController {
         let userPassword = UITextField()
         
         userPassword.placeholder = "Password"
+        userPassword.text = "1234"
         userPassword.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userPassword.frame.height))
         userPassword.leftViewMode = .always
         userPassword.layer.borderWidth = 0.5
