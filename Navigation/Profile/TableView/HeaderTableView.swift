@@ -71,24 +71,17 @@ class HeaderTableVIew: UIView {
     
     private lazy var statusButton: UIButton = {
         
-        let button = UIButton()
-        
-        button.setTitle("Show status", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
-        button.layer.masksToBounds = false
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressButton), for: .touchUpInside)
+        let button = CustomButton(
+            title: "Show status",
+            titleColor: .white,
+            buttonColor: .systemBlue,
+            didTapCallback: pressButton
+        )
         
         return button
     }()
     
-    @objc private func pressButton (){
+    private func pressButton() {
         print(statusViews.text!)
         statusViews.text = statusText
     }
