@@ -61,6 +61,8 @@ class PhotosViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         imagePublisherFasade.removeSubscription(for: self)
+        imagePublisherFasade.rechargeImageLibrary()
+        
         print("Подписка отменена")
     }
     
@@ -182,10 +184,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotosViewController: ImageLibrarySubscriber {
     func receive(images: [UIImage]) {
-        for image in images {
-            imagePublisherFasade.rechargeImageLibrary()
-            newPhoto.append(image)
-        }
+        newPhoto = images
         collectionView.reloadData()
     }
 }

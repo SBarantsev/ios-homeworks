@@ -33,6 +33,8 @@
 		A58258592A5DC958001918BB /* HeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58258582A5DC958001918BB /* HeaderTableView.swift */; };
 		A593FB2C2A4CD59400B474FE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A593FB2B2A4CD59400B474FE /* PhotosTableViewCell.swift */; };
 		A5B3CE612AFEE0E400C09BB9 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A5B3CE602AFEE0E400C09BB9 /* iOSIntPackage */; };
+		A5B508B52B055B0D000498A9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B508B42B055B0D000498A9 /* CustomButton.swift */; };
+		A5B508B82B057DFA000498A9 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B508B72B057DFA000498A9 /* FeedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		A5824CC02AE7047100DBCA78 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		A58258582A5DC958001918BB /* HeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableView.swift; sourceTree = "<group>"; };
 		A593FB2B2A4CD59400B474FE /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		A5B508B42B055B0D000498A9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A5B508B72B057DFA000498A9 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 				A5610E722AF971B30044F9D1 /* Checker.swift */,
 				A51F751C2AFC3FF3001FD1BE /* LoginFactory.swift */,
 				A534ACE32A20028C0067DD9F /* TableView */,
+				A52494342A5210B00032EA4C /* CollectionView */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -152,7 +157,6 @@
 				A534ACE82A2167660067DD9F /* BaseTableViewCell.swift */,
 				A593FB2B2A4CD59400B474FE /* PhotosTableViewCell.swift */,
 				A58258582A5DC958001918BB /* HeaderTableView.swift */,
-				A52494342A5210B00032EA4C /* CollectionView */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -179,6 +183,8 @@
 		A565D3E329D899150034652A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				A5B508B32B055AF0000498A9 /* CustomUI */,
+				A5B508B62B057D22000498A9 /* Feed */,
 				A52CA3CA2A18D375003E11ED /* Profile */,
 				A51BEF1E2A653D01000785F6 /* Data */,
 				A565D3E429D899150034652A /* AppDelegate.swift */,
@@ -186,7 +192,6 @@
 				A565D3ED29D899150034652A /* Assets.xcassets */,
 				A565D3EF29D899150034652A /* LaunchScreen.storyboard */,
 				A565D3F229D899150034652A /* Info.plist */,
-				A565D3F829D89E1E0034652A /* FeedViewController.swift */,
 				A565D3FC29D89E4B0034652A /* PostViewController.swift */,
 				A565D3FE29D89E5E0034652A /* PostHeader.swift */,
 				A565D40029D89E780034652A /* InfoViewController.swift */,
@@ -208,6 +213,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5B508B32B055AF0000498A9 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				A5B508B42B055B0D000498A9 /* CustomButton.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		A5B508B62B057D22000498A9 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				A565D3F829D89E1E0034652A /* FeedViewController.swift */,
+				A5B508B72B057DFA000498A9 /* FeedModel.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,11 +352,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52CA3CE2A18D401003E11ED /* LoginViewController.swift in Sources */,
+				A5B508B52B055B0D000498A9 /* CustomButton.swift in Sources */,
 				A565D3E529D899150034652A /* AppDelegate.swift in Sources */,
 				A565D3F929D89E1E0034652A /* FeedViewController.swift in Sources */,
 				A534ACE92A2167660067DD9F /* BaseTableViewCell.swift in Sources */,
 				A522F58D2AF41FFE005C5720 /* User.swift in Sources */,
 				A565D3FB29D89E2E0034652A /* ProfileViewController.swift in Sources */,
+				A5B508B82B057DFA000498A9 /* FeedModel.swift in Sources */,
 				A565D40129D89E780034652A /* InfoViewController.swift in Sources */,
 				A565D3FF29D89E5E0034652A /* PostHeader.swift in Sources */,
 				A534ACE72A215AED0067DD9F /* UITableView+Extensions.swift in Sources */,
