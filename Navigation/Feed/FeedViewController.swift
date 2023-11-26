@@ -9,10 +9,12 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    private var viewModel: UserVMOutput
+    
     private var post = PostHeader(title: "New post")
     
     private lazy var checkGuessTextField: UITextField = {
-       
+        
         let textField = UITextField()
         textField.backgroundColor = .lightGray
         textField.placeholder = "Введите секретное слово: secret"
@@ -25,20 +27,15 @@ class FeedViewController: UIViewController {
         return textField
     }()
     
-    private lazy var checkGuessButton: CustomButton = {
-        
-        let button = CustomButton(
-            title: "Проверка кодового слова",
-            titleColor: .black,
-            buttonColor: .lightGray,
-            didTapCallback: pressButton
-        )
-        
-        return button
-    }()
+    private lazy var checkGuessButton: UIButton = CustomButton(
+        title: "Проверка кодового слова",
+        titleColor: .black,
+        buttonColor: .lightGray,
+        didTapCallback: pressButton
+    )
     
     private lazy var CheckLabel: UILabel = {
-       
+        
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,17 +44,12 @@ class FeedViewController: UIViewController {
         return label
     }()
     
-    private lazy var actionButton1: UIButton = {
-       
-        let button = CustomButton(
-            title: "Button 1",
-            titleColor: .black,
-            buttonColor: .systemMint,
-            didTapCallback: pressButton1
-        )
-        
-        return button
-    }()
+    private lazy var actionButton1: UIButton = CustomButton(
+        title: "Button 1",
+        titleColor: .black,
+        buttonColor: .systemMint,
+        didTapCallback: pressButton1
+    )
     
     @objc private func pressButton1 () {
         let postViewController = PostViewController()
@@ -65,17 +57,12 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
     
-    private lazy var actionButton2: UIButton = {
-        
-        let button = CustomButton(
-            title: "Button 2",
-            titleColor: .black,
-            buttonColor: .systemBlue,
-            didTapCallback: pressButton2
-        )
-
-       return button
-    }()
+    private lazy var actionButton2: UIButton = CustomButton(
+        title: "Button 2",
+        titleColor: .black,
+        buttonColor: .systemBlue,
+        didTapCallback: pressButton2
+    )
     
     @objc private func pressButton2 () {
         
@@ -85,7 +72,7 @@ class FeedViewController: UIViewController {
     }
     
     private lazy var stackView: UIStackView = { [unowned self] in
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.clipsToBounds = true
@@ -107,13 +94,19 @@ class FeedViewController: UIViewController {
     private func pressButton() {
         
         guard let word = checkGuessTextField.text else {return}
-        let checkWord = FeedModel()
-        let checkResult = checkWord.check(word: word)
-        if checkResult == true {
-            CheckLabel.backgroundColor = .green
-        } else {
-            CheckLabel.backgroundColor = .red
-        }
+        print(word)
+        viewModel.tapButton(word)
+    }
+    
+    // MARK: - Init
+    
+    init(viewModel: UserVMOutput) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -123,8 +116,24 @@ class FeedViewController: UIViewController {
         view.addSubview(stackView)
         
         setupConstraints()
+        bindViewModel()
     }
-        
+    
+    private func bindViewModel() {
+        viewModel.currentState = { [weak self] state in
+            guard let self = self else {return}
+            
+            switch state {
+            case .checkWord:
+                print("Идет проверка секретного слова")
+            case .wordTrue:
+                self.CheckLabel.backgroundColor = .green
+            case .wordFalse:
+                self.CheckLabel.backgroundColor = .red
+            }
+        }
+    }
+    
     private func setupConstraints() {
         
         let safeAreaGuide = view.safeAreaLayoutGuide
@@ -135,6 +144,6 @@ class FeedViewController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 250),
             stackView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -20)
-            ])
+        ])
     }
 }
