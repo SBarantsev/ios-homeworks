@@ -14,6 +14,8 @@ class LogInViewController: UIViewController {
     private let currentUser = CurrenUserService()
     private let testUserServise = TestUserService()
     
+    private var coordinator: LoginCoordinatorProtocol
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -107,6 +109,15 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    init (coordinator: LoginCoordinatorProtocol) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -143,9 +154,10 @@ class LogInViewController: UIViewController {
             }
             
 #endif
-            let profileViewController = ProfileViewController(user: user)
-            profileViewController.title = "Профиль"
-            self.navigationController?.pushViewController(profileViewController, animated: true)
+//            let profileViewController = ProfileViewController(user: user)
+//            profileViewController.title = "Профиль"
+//            self.navigationController?.pushViewController(profileViewController, animated: true)
+            coordinator.switchToNextFlow(currentUser: user)
         }
         else {
             Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)

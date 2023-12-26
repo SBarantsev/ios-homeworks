@@ -62,7 +62,8 @@ class PhotosViewController: UIViewController {
         
         imagePublisherFasade.removeSubscription(for: self)
         imagePublisherFasade.rechargeImageLibrary()
-        
+        tabBarController?.tabBar.isHidden = false
+
         print("Подписка отменена")
     }
     
@@ -72,6 +73,7 @@ class PhotosViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Photo Gallery"
         navigationController?.isNavigationBarHidden = false
+        tabBarController?.tabBar.isHidden = true
     }
     
     private func setupSubviews() {

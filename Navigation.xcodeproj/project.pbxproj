@@ -36,7 +36,16 @@
 		A5B508B52B055B0D000498A9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B508B42B055B0D000498A9 /* CustomButton.swift */; };
 		A5B508B82B057DFA000498A9 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B508B72B057DFA000498A9 /* FeedModel.swift */; };
 		A5BD75982B0FE6FD007E64A6 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD75972B0FE6FD007E64A6 /* FeedViewModel.swift */; };
-		A5BD759A2B100445007E64A6 /* FeedMVVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD75992B100445007E64A6 /* FeedMVVMProtocol.swift */; };
+		A5BD759A2B100445007E64A6 /* FeedViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD75992B100445007E64A6 /* FeedViewModelProtocol.swift */; };
+		A5C287562B1BFB3100F152E9 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287552B1BFB3100F152E9 /* FeedCoordinator.swift */; };
+		A5C287582B1BFB4300F152E9 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287572B1BFB4300F152E9 /* ProfileCoordinator.swift */; };
+		A5C2875C2B1E668E00F152E9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2875B2B1E668E00F152E9 /* MainCoordinator.swift */; };
+		A5C2875E2B1E67D600F152E9 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2875D2B1E67D600F152E9 /* LoginCoordinator.swift */; };
+		A5C287602B1FCDA500F152E9 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C2875F2B1FCDA500F152E9 /* ProfileModel.swift */; };
+		A5C287622B1FCDBB00F152E9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287612B1FCDBB00F152E9 /* ProfileViewModel.swift */; };
+		A5C287642B1FCDD700F152E9 /* ProfileMVVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */; };
+		A5C287662B23BCEA00F152E9 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */; };
+		A5C287682B23BE3100F152E9 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +108,16 @@
 		A5B508B42B055B0D000498A9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A5B508B72B057DFA000498A9 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		A5BD75972B0FE6FD007E64A6 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
-		A5BD75992B100445007E64A6 /* FeedMVVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMVVMProtocol.swift; sourceTree = "<group>"; };
+		A5BD75992B100445007E64A6 /* FeedViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelProtocol.swift; sourceTree = "<group>"; };
+		A5C287552B1BFB3100F152E9 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		A5C287572B1BFB4300F152E9 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		A5C2875B2B1E668E00F152E9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		A5C2875D2B1E67D600F152E9 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		A5C2875F2B1FCDA500F152E9 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		A5C287612B1FCDBB00F152E9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMVVMProtocol.swift; sourceTree = "<group>"; };
+		A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,21 +150,24 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		A52494342A5210B00032EA4C /* CollectionView */ = {
+		A52494342A5210B00032EA4C /* Photo */ = {
 			isa = PBXGroup;
 			children = (
 				A56CE9172A4E07790044A061 /* PhotosViewController.swift */,
 				A52494322A5210A00032EA4C /* PhotosCollectionViewCell.swift */,
 			);
-			path = CollectionView;
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		A52CA3CA2A18D375003E11ED /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				A565D3FA29D89E2E0034652A /* ProfileViewController.swift */,
+				A5C2875F2B1FCDA500F152E9 /* ProfileModel.swift */,
+				A5C287612B1FCDBB00F152E9 /* ProfileViewModel.swift */,
+				A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */,
+				A52494342A5210B00032EA4C /* Photo */,
 				A534ACE32A20028C0067DD9F /* TableView */,
-				A52494342A5210B00032EA4C /* CollectionView */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -184,6 +205,7 @@
 		A565D3E329D899150034652A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				A5FA86282B16885A002CC62E /* Coordinators */,
 				A5B508B62B057D22000498A9 /* Feed */,
 				A5BD759B2B114810007E64A6 /* Login */,
 				A52CA3CA2A18D375003E11ED /* Profile */,
@@ -231,7 +253,7 @@
 				A565D3F829D89E1E0034652A /* FeedViewController.swift */,
 				A5B508B72B057DFA000498A9 /* FeedModel.swift */,
 				A5BD75972B0FE6FD007E64A6 /* FeedViewModel.swift */,
-				A5BD75992B100445007E64A6 /* FeedMVVMProtocol.swift */,
+				A5BD75992B100445007E64A6 /* FeedViewModelProtocol.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -244,6 +266,19 @@
 				A51F751C2AFC3FF3001FD1BE /* LoginFactory.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A5FA86282B16885A002CC62E /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				A5C2875B2B1E668E00F152E9 /* MainCoordinator.swift */,
+				A5C2875D2B1E67D600F152E9 /* LoginCoordinator.swift */,
+				A5C287552B1BFB3100F152E9 /* FeedCoordinator.swift */,
+				A5C287572B1BFB4300F152E9 /* ProfileCoordinator.swift */,
+				A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */,
+				A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,24 +402,33 @@
 			files = (
 				A52CA3CE2A18D401003E11ED /* LoginViewController.swift in Sources */,
 				A5B508B52B055B0D000498A9 /* CustomButton.swift in Sources */,
+				A5C287682B23BE3100F152E9 /* TabBarCoordinator.swift in Sources */,
+				A5C287622B1FCDBB00F152E9 /* ProfileViewModel.swift in Sources */,
+				A5C287662B23BCEA00F152E9 /* CoordinatorProtocol.swift in Sources */,
+				A5C287642B1FCDD700F152E9 /* ProfileMVVMProtocol.swift in Sources */,
 				A565D3E529D899150034652A /* AppDelegate.swift in Sources */,
-				A5BD759A2B100445007E64A6 /* FeedMVVMProtocol.swift in Sources */,
+				A5BD759A2B100445007E64A6 /* FeedViewModelProtocol.swift in Sources */,
 				A565D3F929D89E1E0034652A /* FeedViewController.swift in Sources */,
+				A5C2875E2B1E67D600F152E9 /* LoginCoordinator.swift in Sources */,
 				A534ACE92A2167660067DD9F /* BaseTableViewCell.swift in Sources */,
 				A522F58D2AF41FFE005C5720 /* User.swift in Sources */,
 				A565D3FB29D89E2E0034652A /* ProfileViewController.swift in Sources */,
 				A5B508B82B057DFA000498A9 /* FeedModel.swift in Sources */,
 				A565D40129D89E780034652A /* InfoViewController.swift in Sources */,
 				A565D3FF29D89E5E0034652A /* PostHeader.swift in Sources */,
+				A5C287562B1BFB3100F152E9 /* FeedCoordinator.swift in Sources */,
 				A534ACE72A215AED0067DD9F /* UITableView+Extensions.swift in Sources */,
+				A5C287602B1FCDA500F152E9 /* ProfileModel.swift in Sources */,
 				A56CE9182A4E07790044A061 /* PhotosViewController.swift in Sources */,
 				A593FB2C2A4CD59400B474FE /* PhotosTableViewCell.swift in Sources */,
 				A51BEF202A653D26000785F6 /* Photo.swift in Sources */,
+				A5C287582B1BFB4300F152E9 /* ProfileCoordinator.swift in Sources */,
 				A5BD75982B0FE6FD007E64A6 /* FeedViewModel.swift in Sources */,
 				A565D3E729D899150034652A /* SceneDelegate.swift in Sources */,
 				A52494332A5210A00032EA4C /* PhotosCollectionViewCell.swift in Sources */,
 				A5610E732AF971B30044F9D1 /* Checker.swift in Sources */,
 				A565D3FD29D89E4B0034652A /* PostViewController.swift in Sources */,
+				A5C2875C2B1E668E00F152E9 /* MainCoordinator.swift in Sources */,
 				A51F751D2AFC3FF3001FD1BE /* LoginFactory.swift in Sources */,
 				A58258592A5DC958001918BB /* HeaderTableView.swift in Sources */,
 			);
