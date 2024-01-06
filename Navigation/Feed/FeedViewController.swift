@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    private var viewModel: UserVMOutput
+    private var viewModel: FeedViewModelProtocol
     
     private var post = PostHeader(title: "New post")
     
@@ -100,7 +100,7 @@ class FeedViewController: UIViewController {
     
     // MARK: - Init
     
-    init(viewModel: UserVMOutput) {
+    init(viewModel: FeedViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -120,7 +120,7 @@ class FeedViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.currentState = { [weak self] state in
+        viewModel.handleState = { [weak self] state in
             guard let self = self else {return}
             
             switch state {

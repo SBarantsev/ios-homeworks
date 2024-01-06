@@ -10,20 +10,31 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    // MARK: - Data
+    private var viewModel: ProfileViewModelProtocol
     
-    fileprivate let data = Post.make()
-    
-    private let user: User
-
-    init(user: User) {
-        self.user = user
+    init(viewModel: ProfileViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Data
+    
+//    fileprivate let data = Post.make()
+//
+//    private let user: User
+//
+//    init(user: User) {
+//        self.user = user
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     // MARK: - Subviews
     
@@ -95,7 +106,7 @@ class ProfileViewController: UIViewController {
     private func tuneTableView() {
         
         let headerTableView = HeaderTableVIew()
-        headerTableView.update(user: user)
+        headerTableView.update(user: viewModel.model.user)
         tableView.setAndLayout(headerView: headerTableView)
         tableView.tableFooterView = UIView()
         
@@ -137,7 +148,7 @@ extension ProfileViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return data.count
+            return viewModel.model.data.count
         }
     }
     
@@ -165,7 +176,7 @@ extension ProfileViewController: UITableViewDataSource {
                 fatalError("could not dequeueReusableCell")
             }
             cell.accessoryType = .none
-            cell.update(data[indexPath.row])
+            cell.update(viewModel.model.data[indexPath.row])
             
             return cell
         }
@@ -193,12 +204,13 @@ extension ProfileViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         if indexPath.section == 0 {
-            let nextViewController = PhotosViewController()
-            
-            navigationController?.pushViewController(
-                nextViewController,
-                animated: true
-            )
+//            let nextViewController = PhotosViewController()
+//            
+//            navigationController?.pushViewController(
+//                nextViewController,
+//                animated: true
+//            )
+            viewModel.didTapPhotoCollection()
         } else {return}
     }
 }

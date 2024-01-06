@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var mainCoordinator: MainCoordinatorProtocol?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -18,39 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
     
         let window = UIWindow(windowScene: scene)
-       
-        func createFeedViewController() -> UINavigationController {
-            
-            let viewModel = FeedViewModel()
-            let feedViewController = FeedViewController(viewModel: viewModel)
-            feedViewController.title = "Лента"
-            feedViewController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "house"), tag: 0)
-            return UINavigationController(rootViewController: feedViewController)
-        }
-        
-        func createLoginViewController() -> UINavigationController {
-            let loginFactory = MyLoginFactory().makeLoginInspector()
-//            let loginInspector = LoginInspector()
-            let loginViewController = LogInViewController()
-            loginViewController.loginDelegate = loginFactory 
-//            loginViewController.loginDelegate = loginInspector
-            loginViewController.title = "Профиль"
-            loginViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
-            return UINavigationController(rootViewController: loginViewController)
-        }
- 
-        func createTabBarController() -> UITabBarController {
-            let tabBarController = UITabBarController()
-            let controllers = [createFeedViewController(), createLoginViewController()]
-            tabBarController.viewControllers = controllers
-
-            return tabBarController
-        }
-        
-        window.rootViewController = createTabBarController()
+        let rootViewController = UIViewController()
+        let mainCoordinator = MainCoordinator(rootViewController: rootViewController)
+        window.rootViewController = mainCoordinator.start()
         window.makeKeyAndVisible()
         
         self.window = window
+        self.mainCoordinator = mainCoordinator
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

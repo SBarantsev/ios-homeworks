@@ -7,19 +7,27 @@
 
 import UIKit
 
-final class FeedViewModel: UserVMOutput {
+final class FeedViewModel: FeedViewModelProtocol {
+   
+    enum State {
+        case checkWord
+        case wordTrue
+        case wordFalse
+    }
+    
+    var onNext: Action?
     
     var state: State = .checkWord {
         didSet {
             print(state)
-            currentState?(state)
+            handleState?(state)
         }
     }
     
-    var currentState: ((State) -> Void)?
+    var handleState: ((State) -> Void)?
     
-    init(currentState: ( (State) -> Void)? = nil) {
-        self.currentState = currentState
+    init(handleState: ( (State) -> Void)? = nil) {
+        self.handleState = handleState
     }
     
     func tapButton(_ word: String?) {
@@ -33,3 +41,4 @@ final class FeedViewModel: UserVMOutput {
         }
     }
 }
+
