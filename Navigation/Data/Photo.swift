@@ -9,7 +9,7 @@ import UIKit
 
 struct PhotoGallery {
     let imageName: String
-    let userPhotoAlbum: [UIImage] = []
+//    let userPhotoAlbum: [UIImage] = []
 }
 
 extension PhotoGallery {

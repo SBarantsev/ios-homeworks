@@ -10,8 +10,10 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    let imagePublisherFasade = ImagePublisherFacade()
-    var newPhoto: [UIImage] = []
+    let imageProcessor = ImageProcessor()
+    
+    //    let imagePublisherFasade = ImagePublisherFacade()
+    //    var newPhoto: [UIImage] = []
     
     fileprivate lazy var photos: [PhotoGallery] = PhotoGallery.make()
     var userPhotoAlbum = PhotoGallery.makeUserAlbum(from: PhotoGallery.make())
@@ -49,21 +51,21 @@ class PhotosViewController: UIViewController {
         setupSubviews()
         setupLayouts()
         
-        imagePublisherFasade.subscribe(self)
-        imagePublisherFasade.addImagesWithTimer(
-            time: 0.5,
-            repeat: 20,
-            userImages: userPhotoAlbum
-        )
+        //        imagePublisherFasade.subscribe(self)
+        //        imagePublisherFasade.addImagesWithTimer(
+        //            time: 0.5,
+        //            repeat: 20,
+        //            userImages: userPhotoAlbum
+        //        )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        imagePublisherFasade.removeSubscription(for: self)
-        imagePublisherFasade.rechargeImageLibrary()
+        //        imagePublisherFasade.removeSubscription(for: self)
+        //        imagePublisherFasade.rechargeImageLibrary()
         tabBarController?.tabBar.isHidden = false
-
+        
         print("Подписка отменена")
     }
     
@@ -74,6 +76,34 @@ class PhotosViewController: UIViewController {
         title = "Photo Gallery"
         navigationController?.isNavigationBarHidden = false
         tabBarController?.tabBar.isHidden = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "paintbrush.fill"), style: .plain, target: self, action: #selector(setupFilters))
+    }
+    
+    private func processImage() {
+        let startTime = NSDate()
+        
+        imageProcessor.processImagesOnThread(
+            sourceImages: userPhotoAlbum,
+            filter: .colorInvert,
+            qos: .utility) {images in
+                DispatchQueue.main.async {
+                    self.userPhotoAlbum = []
+                    for image in images {
+                        guard let image = image else {return}
+                        self.userPhotoAlbum.append(UIImage(cgImage: image))
+                    }
+                    
+                    let finishTime = NSDate()
+                    
+                    let timer = finishTime.timeIntervalSince(startTime as Date)
+                    print("Время выполнения \(timer)")
+                    self.collectionView.reloadData()
+                }
+            }
+    }
+    
+    @objc private func setupFilters() {
+        processImage()
     }
     
     private func setupSubviews() {
@@ -107,7 +137,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        newPhoto.count
+        //        newPhoto.count
+        userPhotoAlbum.count
     }
     
     func collectionView(
@@ -117,8 +148,9 @@ extension PhotosViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CellReuseID.photoGalleryCell.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
-        
-        let photo = newPhoto[indexPath.row]
+        //        guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
+        //        let photo = newPhoto[indexPath.row]
+        let photo = userPhotoAlbum[indexPath.row]
         cell.setup(with: photo)
         cell.photoGalleryView.clipsToBounds = false
         
@@ -181,12 +213,5 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         LayoutConstant.spacing
-    }
-}
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        newPhoto = images
-        collectionView.reloadData()
     }
 }
