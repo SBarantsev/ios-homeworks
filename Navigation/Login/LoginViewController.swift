@@ -16,6 +16,8 @@ class LogInViewController: UIViewController {
     
     private var coordinator: LoginCoordinatorProtocol
     
+    private var isPassword = false
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -109,6 +111,21 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var passwordSelectionButton: UIButton = CustomButton(
+        title: "Cгенерировать/подобрать пароль",
+        titleColor: .cyan,
+        buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
+        didTapCallback: pressPasswordSelectionButton
+    )
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let spiner = UIActivityIndicatorView()
+        
+        spiner.translatesAutoresizingMaskIntoConstraints = false
+        spiner.color = .magenta
+        return spiner
+    }()
+    
     init (coordinator: LoginCoordinatorProtocol) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -154,9 +171,9 @@ class LogInViewController: UIViewController {
             }
             
 #endif
-//            let profileViewController = ProfileViewController(user: user)
-//            profileViewController.title = "Профиль"
-//            self.navigationController?.pushViewController(profileViewController, animated: true)
+            //            let profileViewController = ProfileViewController(user: user)
+            //            profileViewController.title = "Профиль"
+            //            self.navigationController?.pushViewController(profileViewController, animated: true)
             coordinator.switchToNextFlow(currentUser: user)
         }
         else {
@@ -173,6 +190,25 @@ class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = 0.0
     }
     
+    @objc func pressPasswordSelectionButton() {
+        
+        activityIndicator.startAnimating()
+        let newPassword = PasswordSelection().generationPassword(quantityPassSymbols: 5)
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            print("Сгенерированный пароль:", newPassword)
+            let brutForcePass = PasswordSelection().brutForce(pass: newPassword)
+            print("Подобранный пароль:", brutForcePass)
+            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.userPassword.text = brutForcePass
+                self.userPassword.isSecureTextEntry = false
+            }
+        }
+    }
+    
     private func setupView() {
         view.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
@@ -186,6 +222,8 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(stackView)
         contentView.addSubview(logIn)
+        contentView.addSubview(passwordSelectionButton)
+        contentView.addSubview(activityIndicator)
     }
     
     private func setupConstraints() {
@@ -217,7 +255,16 @@ class LogInViewController: UIViewController {
             logIn.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             logIn.heightAnchor.constraint(equalToConstant: 50),
             logIn.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            logIn.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16)
+            logIn.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            
+            passwordSelectionButton.topAnchor.constraint(equalTo: logIn.bottomAnchor, constant: 16),
+            passwordSelectionButton.heightAnchor.constraint(equalToConstant: 50),
+            passwordSelectionButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            passwordSelectionButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -82),
+            
+            activityIndicator.topAnchor.constraint(equalTo: logIn.bottomAnchor, constant: 16),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 50),
+            activityIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -41)
         ])
         
         contentView.subviews.last?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true

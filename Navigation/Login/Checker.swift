@@ -17,7 +17,7 @@ final class Checker {
     private init() {}
     
     func chek(log: String, pass: String) -> Bool {
-        log == login && pass == password
+        log == login && pass == pass
     }
 }
 
