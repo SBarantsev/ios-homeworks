@@ -193,14 +193,15 @@ class LogInViewController: UIViewController {
     @objc func pressPasswordSelectionButton() {
         
         activityIndicator.startAnimating()
-        let newPassword = PasswordSelection().generationPassword(quantityPassSymbols: 5)
-        
-        DispatchQueue.global(qos: .background).async {
+        let newPassword = PasswordGeneration().generationPassword(quantityPassSymbols: 3)
+
+        DispatchQueue.global(qos: .userInitiated).async {
             
             print("Сгенерированный пароль:", newPassword)
-            let brutForcePass = PasswordSelection().brutForce(pass: newPassword)
-            print("Подобранный пароль:", brutForcePass)
             
+            let brutForcePass = BrutForce().bruteForce(passwordToUnlock: newPassword)
+            print("Подобранный пароль:", brutForcePass)
+
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.userPassword.text = brutForcePass
