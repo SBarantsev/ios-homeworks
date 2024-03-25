@@ -33,7 +33,7 @@ final class NetworkService {
                 print("Код ошибки: \(httpResponse.statusCode)")
                 
             } else if let httpResponse = response as? HTTPURLResponse {
-                print("HeaderFields: \(httpResponse.allHeaderFields)")
+//                print("HeaderFields: \(httpResponse.allHeaderFields)")
             }
             
             guard let data else {

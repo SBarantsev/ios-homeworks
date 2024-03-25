@@ -52,13 +52,15 @@ class FeedViewController: UIViewController {
     )
     
     @objc private func pressButton1 () {
-        let postViewController = PostViewController()
-        postViewController.title = post.title
-        self.navigationController?.pushViewController(postViewController, animated: true)
+        print("touch button1")
+        viewModel.pushInfoViewController()
+//        let postViewController = PostViewController()
+//        postViewController.title = post.title
+//        self.navigationController?.pushViewController(postViewController, animated: true)
     }
     
     private lazy var actionButton2: UIButton = CustomButton(
-        title: "Button 2",
+        title: "Go to post and info view",
         titleColor: .black,
         buttonColor: .systemBlue,
         didTapCallback: pressButton2
@@ -117,6 +119,7 @@ class FeedViewController: UIViewController {
         
         setupConstraints()
         bindViewModel()
+        actionButton1.isHidden = true
     }
     
     private func bindViewModel() {

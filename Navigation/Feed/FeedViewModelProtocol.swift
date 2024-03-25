@@ -11,4 +11,5 @@ protocol FeedViewModelProtocol {
     
     var handleState: ((FeedViewModel.State) -> Void)? { get set }
     func tapButton(_ word: String?)
+    func pushInfoViewController()
 }

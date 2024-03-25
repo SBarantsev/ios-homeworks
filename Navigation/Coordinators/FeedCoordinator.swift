@@ -7,27 +7,52 @@
 
 import UIKit
 
-protocol FeedCoordinatroProtocol: AnyObject {
-    
+protocol FeedCoordinatorProtocol {
+    func pushInfoViewController()
 }
 
-class FeedCoordinator {
+final class FeedCoordinator {
     
-    var parentCoordinator: TabBarCoordinatorProtocol?
-    lazy var rootViewController: UIViewController = UIViewController()
+//    var parentCoordinator: TabBarCoordinatorProtocol?
+//    lazy var rootViewController: UIViewController = UIViewController()
+//
+    private var navigationController = UINavigationController()
+    private weak var parentCoordinator: TabBarCoordinatorProtocol?
+    
+    init(navigationController: UINavigationController, parentCoordinator: TabBarCoordinatorProtocol?) {
+        self.navigationController = navigationController
+        self.parentCoordinator = parentCoordinator
+    }
 }
 
 extension FeedCoordinator: CoordinatorProtocol {
     func start() -> UIViewController {
-        let viewModel = FeedViewModel()
-        let feedViewController = FeedViewController(viewModel: viewModel)
-        feedViewController.title = "Лента"
-        feedViewController.tabBarItem = UITabBarItem(
+//        let feedModel = FeedModel()
+        let feedViewModel = FeedViewModel(coordinator: self)
+        let feedViewController = FeedViewController(viewModel: feedViewModel)
+        let navController = UINavigationController(rootViewController: feedViewController)
+        
+        navController.tabBarItem = UITabBarItem(
             title: "Лента",
             image: UIImage(systemName: "house"),
             tag: 0
         )
-        return feedViewController
+        
+//        feedViewController.title = "Лента"
+//        feedViewController.tabBarItem = UITabBarItem(
+//            title: "Лента",
+//            image: UIImage(systemName: "house"),
+//            tag: 0
+//        )
+        return navController
+    }
+}
+
+extension FeedCoordinator: FeedCoordinatorProtocol {
+    func pushInfoViewController() {
+        print("kjb")
+        let infoViewController = PostViewController()
+        navigationController.pushViewController(infoViewController, animated: true)
     }
 }
 

@@ -9,6 +9,8 @@ import UIKit
 
 final class FeedViewModel: FeedViewModelProtocol {
    
+    private let coordinator: FeedCoordinatorProtocol
+    
     enum State {
         case checkWord
         case wordTrue
@@ -26,8 +28,9 @@ final class FeedViewModel: FeedViewModelProtocol {
     
     var handleState: ((State) -> Void)?
     
-    init(handleState: ( (State) -> Void)? = nil) {
+    init(handleState: ( (State) -> Void)? = nil, coordinator: FeedCoordinatorProtocol) {
         self.handleState = handleState
+        self.coordinator = coordinator
     }
     
     func tapButton(_ word: String?) {
@@ -42,3 +45,8 @@ final class FeedViewModel: FeedViewModelProtocol {
     }
 }
 
+extension FeedViewModel: FeedCoordinatorProtocol {
+    func pushInfoViewController() {
+        coordinator.pushInfoViewController()
+    }
+}

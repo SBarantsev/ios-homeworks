@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol TabBarCoordinatorProtocol: AnyObject {
-    
+    func goToNextFlow()
 }
 
 final class TabBarCoordinator {
@@ -41,13 +41,25 @@ final class TabBarCoordinator {
 extension TabBarCoordinator: CoordinatorProtocol {
     func start() -> UIViewController {
         let tabBarController = UITabBarController()
-        let feedCoordinator = FeedCoordinator()
+        
+        let feedCoordinator = FeedCoordinator(
+            navigationController: UINavigationController(),
+            parentCoordinator: self
+        )
+        addChildCoordinator(coordinator: feedCoordinator)
+        
         let profileCoordinator = ProfileCoordinator(
             parentCoordinator: self,
-            navController: UINavigationController(),
-            currentUser: currentUser)
+            navigationController: UINavigationController(),
+            currentUser: currentUser
+        )
+        addChildCoordinator(coordinator: profileCoordinator)
         
-        let controllers = [feedCoordinator.start(), profileCoordinator.start()]
+        let controllers = [
+            feedCoordinator.start(),
+            profileCoordinator.start()
+        ]
+        
         tabBarController.viewControllers = controllers
         self.tabBarController = tabBarController
         return self.tabBarController
@@ -55,5 +67,7 @@ extension TabBarCoordinator: CoordinatorProtocol {
 }
 
 extension TabBarCoordinator: TabBarCoordinatorProtocol {
-    
+    func goToNextFlow() {
+        self.parentCoordinator?.switchToNextFlow(currentCoordinator: self, currentUser: self.currentUser)
+    }
 }

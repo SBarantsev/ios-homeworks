@@ -9,6 +9,8 @@ import UIKit
 
 class PostViewController: UIViewController {
     
+    private let network = NetworkService2()
+    
     private func setupView() {
         view.backgroundColor = .systemPurple
         
