@@ -19,11 +19,11 @@ class ProfileCoordinator {
     private var currentUser: User
    
     init(parentCoordinator: TabBarCoordinatorProtocol?,
-         navController: UINavigationController,
+         navigationController: UINavigationController,
          currentUser: User
     ) {
         self.parentCoordinator = parentCoordinator
-        self.navController = navController
+        self.navController = navigationController
         self.currentUser = currentUser
     }
 }
