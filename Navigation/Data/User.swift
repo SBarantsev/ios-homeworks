@@ -25,7 +25,7 @@ extension User {
                  userName: "Big Doggy Boss",
                  avatar: UIImage(named:"photo_9"),
                  status: "Where's my chappy??"),
-            User(login: "cat",
+            User(login: "cat@mail.ru",
                  userName: "Lion",
                  avatar: UIImage(named:"photo_11"),
                  status: "Let's go to the party")
