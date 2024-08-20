@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LogInViewController: UIViewController {
+    
+    private let authService = AuthService()
     
     var loginDelegate: LoginViewControllerDelegate?
     
@@ -181,8 +184,24 @@ class LogInViewController: UIViewController {
         removeKeyboardObservers()
     }
     
-    @objc func pressButtonLogIn() {
+    @objc private func pressButtonLogIn() {
         
+////
+        authService.loginUser(email: userInfo.text!,
+                              password: userPassword.text!) { [weak self] result in
+            switch result {
+            case .success(let user):
+                self?.loginSucsess(user: user)
+            case .failure:
+                self?.showAddNewUser(completion: { [weak self] email, password in
+                    self?.authService.signUpUser(email: email,
+                                                 password: password,
+                                                 completion: { user in
+                        print(user)
+                    })
+                })
+            }
+////
         passwordSelectionButton.isHidden = true
         logIn.isHidden = true
         enterButton.isHidden = false
@@ -218,7 +237,43 @@ class LogInViewController: UIViewController {
         }
         else {
             Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
+////
         }
+    }
+    
+    
+    
+    
+//        @objc func pressButtonLogIn() {
+//
+//            guard let login = userInfo.text else {return}
+//            guard let password = userPassword.text else {return}
+//            if loginDelegate?.check(login: login, password: password) == true {
+//
+//    #if DEBUG
+//                guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
+//
+//    #else
+//                guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
+//                    Alert.shared.showAlert(title: "Ошибка", massage: "Пользователь не найден", viewController: self)
+//                    return
+//                }
+//
+//    #endif
+//    //            let profileViewController = ProfileViewController(user: user)
+//    //            profileViewController.title = "Профиль"
+//    //            self.navigationController?.pushViewController(profileViewController, animated: true)
+//                coordinator.switchToNextFlow(currentUser: user)
+//            }
+//            else {
+//                Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
+//            }
+//        }
+    
+    private func loginSucsess(user: FirebaseUser) {
+
+        let user = User(login: "cat", userName: "cat", status: "your status")
+        coordinator.switchToNextFlow(currentUser: user)
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
