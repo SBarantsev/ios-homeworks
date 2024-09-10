@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Private
@@ -109,6 +109,15 @@ class ProfileViewController: UIViewController {
         headerTableView.update(user: viewModel.model.user)
         tableView.setAndLayout(headerView: headerTableView)
         tableView.tableFooterView = UIView()
+        
+        headerTableView.onButtonTapped = { [weak self] in
+            let navigationController = NavigationViewController()
+            navigationController.view.backgroundColor = .white
+            navigationController.title = "MAP"
+            
+            self?.navigationController?.pushViewController(navigationController, animated: true)
+//            self?.present(navigationController, animated: true, completion: nil)
+        }
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0

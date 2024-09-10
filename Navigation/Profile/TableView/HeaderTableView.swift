@@ -9,6 +9,8 @@ import UIKit
 
 class HeaderTableVIew: UIView {
     
+    var onButtonTapped: (() -> Void)?
+    
     private var statusText: String = ""
     
     private let photoImageView: UIImageView = {
@@ -81,6 +83,18 @@ class HeaderTableVIew: UIView {
         return button
     }()
     
+    lazy var navigationButton: UIButton = {
+       
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.tintColor = .systemBlue
+        button.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pressNavigationButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
     private func pressButton() {
         print(statusViews.text!)
         statusViews.text = statusText
@@ -88,6 +102,10 @@ class HeaderTableVIew: UIView {
     
     @objc private func statusTextChange(_ textField: UITextField) {
         self.statusText = enterStatusViews.text!
+    }
+    
+    @objc private func pressNavigationButton() {
+        onButtonTapped?()
     }
     
     override init(frame: CGRect) {
@@ -108,6 +126,7 @@ class HeaderTableVIew: UIView {
         addSubview(statusViews)
         addSubview(statusButton)
         addSubview(enterStatusViews)
+        addSubview(navigationButton)
     }
     
     private func setupConstraints() {
@@ -122,7 +141,7 @@ class HeaderTableVIew: UIView {
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             nameLabel.heightAnchor.constraint(equalToConstant: 18),
             nameLabel.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
-            nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -48),
             
             statusButton.heightAnchor.constraint(equalToConstant: 50),
             statusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
@@ -139,6 +158,9 @@ class HeaderTableVIew: UIView {
             enterStatusViews.heightAnchor.constraint(equalToConstant: 40),
             enterStatusViews.leftAnchor.constraint(equalTo: photoImageView.rightAnchor, constant: 20),
             enterStatusViews.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            
+            navigationButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            navigationButton.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
         ])
     }
     

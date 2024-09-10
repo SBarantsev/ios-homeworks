@@ -186,7 +186,6 @@ class LogInViewController: UIViewController {
     
     @objc private func pressButtonLogIn() {
         
-////
         authService.loginUser(email: userInfo.text!,
                               password: userPassword.text!) { [weak self] result in
             switch result {
@@ -201,7 +200,7 @@ class LogInViewController: UIViewController {
                     })
                 })
             }
-////
+        }
         passwordSelectionButton.isHidden = true
         logIn.isHidden = true
         enterButton.isHidden = false
@@ -211,36 +210,37 @@ class LogInViewController: UIViewController {
         self.userPassword.text = ""
         self.userPassword.placeholder = "Введите код из смс (1234)"
         self.userPassword.tintColor = .gray
+        
         createTimerBtn()
     }
-    
-    func pressEnterButton() {
-        
-        guard let login = userInfo.text else {return}
-        guard let password = userPassword.text else {return}
-        if loginDelegate?.check(login: login, password: password) == true {
+
+        func pressEnterButton() {
             
+            guard let login = userInfo.text else {return}
+            guard let password = userPassword.text else {return}
+            if loginDelegate?.check(login: login, password: password) == true {
+                
 #if DEBUG
-            guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
-            
+                guard let user = testUserServise.checkUser(login: testUserServise.user.login) else {return}
+                
 #else
-            guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
-                Alert.shared.showAlert(title: "Ошибка", massage: "Пользователь не найден", viewController: self)
-                return
-            }
-            
+                guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
+                    Alert.shared.showAlert(title: "Ошибка", massage: "Пользователь не найден", viewController: self)
+                    return
+                }
+                
 #endif
-            //            let profileViewController = ProfileViewController(user: user)
-            //            profileViewController.title = "Профиль"
-            //            self.navigationController?.pushViewController(profileViewController, animated: true)
-            coordinator.switchToNextFlow(currentUser: user)
+                //            let profileViewController = ProfileViewController(user: user)
+                //            profileViewController.title = "Профиль"
+                //            self.navigationController?.pushViewController(profileViewController, animated: true)
+                coordinator.switchToNextFlow(currentUser: user)
+            }
+            else {
+                Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
+                // end
+            }
         }
-        else {
-            Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
-////
-        }
-    }
-    
+//    }
     
     
     
@@ -286,17 +286,17 @@ class LogInViewController: UIViewController {
     }
     
     @objc func pressPasswordSelectionButton() {
-        
+
         activityIndicator.startAnimating()
-        let newPassword = PasswordGeneration().generationPassword(quantityPassSymbols: 3)
-        
+        let newPassword = PasswordGeneration2().generationPassword(quantityPassSymbols: 3)
+
         DispatchQueue.global(qos: .userInitiated).async {
-            
+
             print("Сгенерированный пароль:", newPassword)
-            
+
             let brutForcePass = BrutForce().bruteForce(passwordToUnlock: newPassword)
             print("Подобранный пароль:", brutForcePass)
-            
+
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.userPassword.text = brutForcePass
