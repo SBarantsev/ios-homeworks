@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Sergey on 16.09.2024.
+  
+*/
+
+"LogIn" = "Войти";
+"Email or phone" = "Email или телефон";
+"Password" = "Пароль";
+"Show status" = "Показать статус";
+"Photos" = "Фото";
+"Update status" = "Обновить статус";
+"Eror" = "Ошибка";
+"Try again" = "Попробуйте еще раз";
+"The user's data was not found, please try again" = "Данные пользователя не найдены, попробуйте снова";
+ "To registrater a new user, enter your email and password" = "Для регистрации нового пользователя введите email и password";
+"Cancel" = "Отмена";
+"Feed" = "Лента";
+"Profile" = "Профиль";
+"Generate/Select password" = "Cгенерировать/подобрать пароль";
+"re-send sms via:" = "Повторно отправить смс через:";
+"Enter the code fron the SMS" = "Введите код из смс (1234)";
+"The user was not found" = "Пользователь не найден";
+"Invalid username and password" = "Не верные имя пользователя или пароль";
+"Photo Gallery" = "Фото галерея";
+"Checking the code word" = "Проверка кодового слова";
+"Go to post and info view" = "Перейти к экрану информации";

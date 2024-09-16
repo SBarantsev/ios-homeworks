@@ -36,7 +36,7 @@ extension ProfileCoordinator: CoordinatorProtocol {
         let viewController = ProfileViewController(viewModel: viewModel)
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem = UITabBarItem(
-            title: "Профиль",
+            title: "Profile".localize,
             image: UIImage(systemName: "person.circle"),
             tag: 1
         )

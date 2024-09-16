@@ -9,5 +9,5 @@ import UIKit
 
 final class FeedModel {
     
-    let secretWord = "secret"
+    let secretWord = "secret".localize
 }

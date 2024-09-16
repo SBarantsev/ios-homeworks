@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
     }()
     
     private lazy var checkGuessButton: UIButton = CustomButton(
-        title: "Проверка кодового слова",
+        title: "Checking the code word".localize,
         titleColor: .black,
         buttonColor: .lightGray,
         didTapCallback: pressButton
@@ -60,7 +60,7 @@ class FeedViewController: UIViewController {
     }
     
     private lazy var actionButton2: UIButton = CustomButton(
-        title: "Go to post and info view",
+        title: "Go to post and info view".localize,
         titleColor: .black,
         buttonColor: .systemBlue,
         didTapCallback: pressButton2

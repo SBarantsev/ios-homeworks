@@ -57,7 +57,7 @@ class LogInViewController: UIViewController {
     private lazy var userInfo: UITextField = {
         let userInfo = UITextField()
         
-        userInfo.placeholder = "Email or phone"
+        userInfo.placeholder = "Email or phone".localize
         userInfo.text = "cat"
         userInfo.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userInfo.frame.height))
         userInfo.leftViewMode = .always
@@ -70,7 +70,7 @@ class LogInViewController: UIViewController {
     private lazy var userPassword: UITextField = {
         let userPassword = UITextField()
         
-        userPassword.placeholder = "Password"
+        userPassword.placeholder = "Password".localize
         userPassword.text = "1234"
         userPassword.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userPassword.frame.height))
         userPassword.leftViewMode = .always
@@ -106,7 +106,7 @@ class LogInViewController: UIViewController {
     private lazy var logIn: UIButton = {
         let button = UIButton()
         
-        button.setTitle("Log In", for: .normal)
+        button.setTitle("LogIn".localize, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.setBackgroundImage(UIImage(named: "LogIn"), for: .normal)
@@ -118,21 +118,21 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var enterButton: UIButton = CustomButton(
-        title: "Войти",
+        title: "LogIn".localize,
         titleColor: .white,
         buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
         didTapCallback: pressEnterButton
     )
     
     private lazy var passwordSelectionButton: UIButton = CustomButton(
-        title: "Cгенерировать/подобрать пароль",
+        title: "Generate/Select password".localize,
         titleColor: .white,
         buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
         didTapCallback: pressPasswordSelectionButton
     )
     
     private lazy var requestPushPassButton: UIButton = CustomButton(
-        title: "Повторно отправить смс через:",
+        title: "re-send sms via:".localize,
         titleColor: .white,
         buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
         didTapCallback: pressRequestPushPassButton
@@ -185,7 +185,10 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func pressButtonLogIn() {
-        
+// временный обход регистрации
+        var user = User.make()
+        coordinator.switchToNextFlow(currentUser: user[1])
+
         authService.loginUser(email: userInfo.text!,
                               password: userPassword.text!) { [weak self] result in
             switch result {
@@ -208,7 +211,7 @@ class LogInViewController: UIViewController {
         timerLabel.isHidden = false
         
         self.userPassword.text = ""
-        self.userPassword.placeholder = "Введите код из смс (1234)"
+        self.userPassword.placeholder = "Enter the code fron the SMS".localize
         self.userPassword.tintColor = .gray
         
         createTimerBtn()
@@ -225,7 +228,7 @@ class LogInViewController: UIViewController {
                 
 #else
                 guard let user = currentUser.checkUser(login: userInfo.text ?? "") else {
-                    Alert.shared.showAlert(title: "Ошибка", massage: "Пользователь не найден", viewController: self)
+                    Alert.shared.showAlert(title: "Cancel".localize, massage: "The user was not found".localize, viewController: self)
                     return
                 }
                 
@@ -236,7 +239,7 @@ class LogInViewController: UIViewController {
                 coordinator.switchToNextFlow(currentUser: user)
             }
             else {
-                Alert.shared.showAlert(title: "Ошибка", massage: "Не верные имя пользователя или пароль", viewController: self)
+                Alert.shared.showAlert(title: "Cancel".localize, massage: "Invalid username and password".localize, viewController: self)
                 // end
             }
         }

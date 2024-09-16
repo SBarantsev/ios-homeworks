@@ -22,7 +22,7 @@ final class CheckerService: CheckerServiceProtocol {
             
             _ = User(login: user.email!,
                                userName: user.displayName!,
-                               status: "Обновить статус"
+                     status: "Update status".localize
             )
         }
     }

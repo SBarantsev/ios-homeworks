@@ -19,7 +19,7 @@ class PhotosTableViewCell: UITableViewCell {
     let headerLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Photos"
+        label.text = "Photos".localize
         label.textColor = .black
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
