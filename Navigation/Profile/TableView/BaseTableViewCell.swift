@@ -44,7 +44,7 @@ class BaseTableViewCell: UITableViewCell {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.numberOfLines = 0
         textLabel.font = .systemFont(ofSize: 14)
-        textLabel.textColor = .systemGray
+        textLabel.textColor = .black
         
         return textLabel
     }()
@@ -82,7 +82,7 @@ class BaseTableViewCell: UITableViewCell {
             style: .value1,
             reuseIdentifier: reuseIdentifier
         )
-        
+
         tuneView()
     }
     
@@ -112,8 +112,8 @@ class BaseTableViewCell: UITableViewCell {
     // MARK: - Private
     
     private func tuneView() {
-        backgroundColor = .tertiarySystemBackground
-        contentView.backgroundColor = .tertiarySystemBackground
+        backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
+        contentView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         textLabel?.backgroundColor = .clear
         
         accessoryView = nil

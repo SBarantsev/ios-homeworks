@@ -105,6 +105,7 @@ class FeedViewController: UIViewController {
     init(viewModel: FeedViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
     }
     
     required init?(coder: NSCoder) {

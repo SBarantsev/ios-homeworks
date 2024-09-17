@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     init(viewModel: ProfileViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +45,7 @@ class ProfileViewController: UIViewController {
             style: .grouped
         )
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         
         return tableView
     }()
@@ -60,9 +62,14 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Lifecycle
     
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//        view.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupView()
         addSubviews()
         setupConstraints()

@@ -61,6 +61,7 @@
 		A5C287642B1FCDD700F152E9 /* ProfileMVVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */; };
 		A5C287662B23BCEA00F152E9 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */; };
 		A5C287682B23BE3100F152E9 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */; };
+		A5F296A42C9A20E8000532A6 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F296A32C9A20E8000532A6 /* ExtensionUIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMVVMProtocol.swift; sourceTree = "<group>"; };
 		A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		A5F296A32C9A20E8000532A6 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				A52E772B2C98D61000262B91 /* ExtensionString.swift */,
+				A5F296A32C9A20E8000532A6 /* ExtensionUIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				A58258592A5DC958001918BB /* HeaderTableView.swift in Sources */,
 				A58F4F582C77D21600D0D749 /* NetworkService.swift in Sources */,
 				A5547EBF2BC33D7E0051EB9F /* FirebaseUser.swift in Sources */,
+				A5F296A42C9A20E8000532A6 /* ExtensionUIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

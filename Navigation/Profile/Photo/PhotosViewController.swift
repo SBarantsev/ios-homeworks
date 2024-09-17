@@ -32,7 +32,7 @@ class PhotosViewController: UIViewController {
             collectionViewLayout: viewLayout
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         
         collectionView.register(
             PhotosCollectionViewCell.self,
@@ -43,6 +43,15 @@ class PhotosViewController: UIViewController {
     }()
     
     // MARK: - LifeStyle
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
