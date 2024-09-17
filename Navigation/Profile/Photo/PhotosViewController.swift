@@ -73,7 +73,7 @@ class PhotosViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Photo Gallery"
+        title = "Photo Gallery".localize
         navigationController?.isNavigationBarHidden = false
         tabBarController?.tabBar.isHidden = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "paintbrush.fill"), style: .plain, target: self, action: #selector(setupFilters))

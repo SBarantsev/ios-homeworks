@@ -33,7 +33,7 @@ extension FeedCoordinator: CoordinatorProtocol {
         let navController = UINavigationController(rootViewController: feedViewController)
         
         navController.tabBarItem = UITabBarItem(
-            title: "Лента",
+            title: "Feed".localize,
             image: UIImage(systemName: "house"),
             tag: 0
         )
@@ -50,7 +50,6 @@ extension FeedCoordinator: CoordinatorProtocol {
 
 extension FeedCoordinator: FeedCoordinatorProtocol {
     func pushInfoViewController() {
-        print("kjb")
         let infoViewController = PostViewController()
         navigationController.pushViewController(infoViewController, animated: true)
     }

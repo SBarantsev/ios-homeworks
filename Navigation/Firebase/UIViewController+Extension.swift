@@ -10,8 +10,8 @@ import UIKit
 
 extension UIViewController {
     func showAlert() {
-        let alertViewController = UIAlertController(title: "Ошибка",
-                                                    message: "Попробуйте еще раз",
+        let alertViewController = UIAlertController(title: "Cancel".localize,
+                                                    message: "Try again".localize,
                                                     preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Ok",
@@ -22,8 +22,8 @@ extension UIViewController {
     
     func showAddNewUser(completion: @escaping (String, String) -> Void) {
         let alertViewController = UIAlertController(
-            title: "Данные пользователя не найдены, попробуйте снова",
-            message: "Для регистрации нового пользователя введите email и password",
+            title: "The user's data was not found, please try again".localize,
+            message: "To registrater a new user, enter your email and password".localize,
             preferredStyle: .alert
         )
         alertViewController.addTextField()
@@ -38,7 +38,7 @@ extension UIViewController {
             completion(email, password)
         }
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localize, style: .cancel)
         
         alertViewController.addAction(okAction)
         alertViewController.addAction(cancelAction)

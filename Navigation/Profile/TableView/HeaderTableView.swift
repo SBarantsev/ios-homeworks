@@ -74,7 +74,7 @@ class HeaderTableVIew: UIView {
     private lazy var statusButton: UIButton = {
         
         let button = CustomButton(
-            title: "Show status",
+            title: "Show status".localize,
             titleColor: .white,
             buttonColor: .systemBlue,
             didTapCallback: pressButton
