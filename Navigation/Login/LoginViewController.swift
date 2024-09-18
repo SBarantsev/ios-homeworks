@@ -29,7 +29,7 @@ class LogInViewController: UIViewController {
         
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -39,7 +39,7 @@ class LogInViewController: UIViewController {
     private lazy var contentView: UIView = {
         let contentView = UIView()
         
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         return contentView
@@ -75,7 +75,7 @@ class LogInViewController: UIViewController {
         userPassword.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userPassword.frame.height))
         userPassword.leftViewMode = .always
         userPassword.layer.borderWidth = 0.5
-        userPassword.layer.borderColor = UIColor.lightGray.cgColor
+        userPassword.layer.borderColor = UIColor.black.cgColor
         userPassword.autocapitalizationType = .none
         userPassword.isSecureTextEntry = true
         userPassword.delegate = self
@@ -92,8 +92,8 @@ class LogInViewController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 0
-        stackView.backgroundColor = .systemGray6
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
+        stackView.layer.borderColor = UIColor.black.cgColor
         stackView.layer.borderWidth = 0.5
         stackView.layer.cornerRadius = 10
         
@@ -158,6 +158,7 @@ class LogInViewController: UIViewController {
     init (coordinator: LoginCoordinatorProtocol) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
     }
     
     required init?(coder: NSCoder) {
@@ -166,7 +167,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupView()
         addSubviews()
         setupConstraints()

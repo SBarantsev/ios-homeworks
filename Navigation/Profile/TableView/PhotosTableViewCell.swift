@@ -45,7 +45,7 @@ class PhotosTableViewCell: UITableViewCell {
             collectionViewLayout: viewLayout
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
 
         collectionView.register(
             PhotosCollectionViewCell.self,
@@ -95,8 +95,8 @@ class PhotosTableViewCell: UITableViewCell {
     // MARK: - Private
     
     private func tuneView() {
-        backgroundColor = .systemBackground
-        contentView.backgroundColor = .systemBackground
+        backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
+        contentView.backgroundColor = .createColor(lightMode: .systemMint, darkMode: .systemGray)
         textLabel?.backgroundColor = .clear
         
         accessoryView = nil
