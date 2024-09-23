@@ -16,6 +16,7 @@
 		A52E772C2C98D61000262B91 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E772B2C98D61000262B91 /* ExtensionString.swift */; };
 		A534ACE72A215AED0067DD9F /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534ACE62A215AED0067DD9F /* UITableView+Extensions.swift */; };
 		A534ACE92A2167660067DD9F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534ACE82A2167660067DD9F /* BaseTableViewCell.swift */; };
+		A54C43C22C9B6EA300C2D1C2 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54C43C12C9B6EA300C2D1C2 /* LocalNotificationsService.swift */; };
 		A5547EBA2BC339BD0051EB9F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A5547EB92BC339BD0051EB9F /* FirebaseAuth */; };
 		A5547EBD2BC33B960051EB9F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5547EBC2BC33B960051EB9F /* AuthService.swift */; };
 		A5547EBF2BC33D7E0051EB9F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5547EBE2BC33D7E0051EB9F /* FirebaseUser.swift */; };
@@ -107,6 +108,7 @@
 		A534ACE62A215AED0067DD9F /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		A534ACE82A2167660067DD9F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		A534ACEA2A2685970067DD9F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A54C43C12C9B6EA300C2D1C2 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		A5547EBC2BC33B960051EB9F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A5547EBE2BC33D7E0051EB9F /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
 		A5547EC02BC343BC0051EB9F /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				A565D3E429D899150034652A /* AppDelegate.swift */,
 				A565D3E629D899150034652A /* SceneDelegate.swift */,
+				A54C43C12C9B6EA300C2D1C2 /* LocalNotificationsService.swift */,
 				A52E77242C98D11400262B91 /* Localization */,
 				A52E772A2C98D5F300262B91 /* Extension */,
 				A5547EBB2BC33B570051EB9F /* Firebase */,
@@ -505,6 +508,7 @@
 				A565D3F929D89E1E0034652A /* FeedViewController.swift in Sources */,
 				A5C2875E2B1E67D600F152E9 /* LoginCoordinator.swift in Sources */,
 				A534ACE92A2167660067DD9F /* BaseTableViewCell.swift in Sources */,
+				A54C43C22C9B6EA300C2D1C2 /* LocalNotificationsService.swift in Sources */,
 				A522F58D2AF41FFE005C5720 /* User.swift in Sources */,
 				A565D3FB29D89E2E0034652A /* ProfileViewController.swift in Sources */,
 				A58F4F592C77D21600D0D749 /* NetworkService2.swift in Sources */,
