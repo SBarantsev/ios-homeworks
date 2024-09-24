@@ -62,6 +62,7 @@
 		A5C287642B1FCDD700F152E9 /* ProfileMVVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */; };
 		A5C287662B23BCEA00F152E9 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */; };
 		A5C287682B23BE3100F152E9 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */; };
+		A5CA0FD52CA2057300A550EA /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0FD42CA2057300A550EA /* LocalAuthorizationService.swift */; };
 		A5F296A42C9A20E8000532A6 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F296A32C9A20E8000532A6 /* ExtensionUIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +152,7 @@
 		A5C287632B1FCDD700F152E9 /* ProfileMVVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMVVMProtocol.swift; sourceTree = "<group>"; };
 		A5C287652B23BCEA00F152E9 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		A5C287672B23BE3100F152E9 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		A5CA0FD42CA2057300A550EA /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		A5F296A32C9A20E8000532A6 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +274,7 @@
 				A565D3E429D899150034652A /* AppDelegate.swift */,
 				A565D3E629D899150034652A /* SceneDelegate.swift */,
 				A54C43C12C9B6EA300C2D1C2 /* LocalNotificationsService.swift */,
+				A5CA0FD32CA2054000A550EA /* Settings */,
 				A52E77242C98D11400262B91 /* Localization */,
 				A52E772A2C98D5F300262B91 /* Extension */,
 				A5547EBB2BC33B570051EB9F /* Firebase */,
@@ -357,6 +360,14 @@
 				A58F4F522C77CDA800D0D749 /* PasswordGeneration2.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A5CA0FD32CA2054000A550EA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A5CA0FD42CA2057300A550EA /* LocalAuthorizationService.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		A5FA86282B16885A002CC62E /* Coordinators */ = {
@@ -521,6 +532,7 @@
 				A5547EC52BC7287F0051EB9F /* UIViewController+Extension.swift in Sources */,
 				A534ACE72A215AED0067DD9F /* UITableView+Extensions.swift in Sources */,
 				A5C287602B1FCDA500F152E9 /* ProfileModel.swift in Sources */,
+				A5CA0FD52CA2057300A550EA /* LocalAuthorizationService.swift in Sources */,
 				A56CE9182A4E07790044A061 /* PhotosViewController.swift in Sources */,
 				A58F4F532C77CDA800D0D749 /* PasswordGeneration2.swift in Sources */,
 				A593FB2C2A4CD59400B474FE /* PhotosTableViewCell.swift in Sources */,
@@ -718,6 +730,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Разрешить доступ к локации";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить доступ к геопозиции?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -746,6 +761,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Разрешить доступ к локации";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить доступ к геопозиции?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
