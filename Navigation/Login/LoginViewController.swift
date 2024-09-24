@@ -16,6 +16,7 @@ class LogInViewController: UIViewController {
     
     private let currentUser = CurrenUserService()
     private let testUserServise = TestUserService()
+    private let localAuthorizationService = LocalAuthorizationService.shared
     
     private var coordinator: LoginCoordinatorProtocol
     
@@ -122,6 +123,13 @@ class LogInViewController: UIViewController {
         titleColor: .white,
         buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
         didTapCallback: pressEnterButton
+    )
+    
+    private lazy var enterFaceIdButton: UIButton = CustomButton(
+        title: "FaceID".localize,
+        titleColor: .white,
+        buttonColor: UIColor(patternImage: UIImage(named: "LogIn")!),
+        didTapCallback: pressFaceIdButton
     )
     
     private lazy var passwordSelectionButton: UIButton = CustomButton(
@@ -274,6 +282,20 @@ class LogInViewController: UIViewController {
 //            }
 //        }
     
+    func pressFaceIdButton() {
+        localAuthorizationService.authorizeIfPossible { result in
+            DispatchQueue.main.async { [self] in
+                switch result {
+                case .success(_):
+                    let user = User.make()
+                    coordinator.switchToNextFlow(currentUser: user[1])
+                case .failure(let error):
+                    print("Biometric error " + "\(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
     private func loginSucsess(user: FirebaseUser) {
 
         let user = User(login: "cat", userName: "cat", status: "your status")
@@ -348,6 +370,7 @@ class LogInViewController: UIViewController {
         contentView.addSubview(activityIndicator)
         contentView.addSubview(timerLabel)
         contentView.addSubview(enterButton)
+        contentView.addSubview(enterFaceIdButton)
         contentView.addSubview(requestPushPassButton)
         scrollView.addSubview(contentView)
     }
@@ -382,7 +405,7 @@ class LogInViewController: UIViewController {
             logIn.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             logIn.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
             
-            passwordSelectionButton.topAnchor.constraint(equalTo: logIn.bottomAnchor, constant: 16),
+            passwordSelectionButton.topAnchor.constraint(equalTo: enterFaceIdButton.bottomAnchor, constant: 16),
             passwordSelectionButton.heightAnchor.constraint(equalToConstant: 50),
             passwordSelectionButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             passwordSelectionButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -82),
@@ -404,7 +427,12 @@ class LogInViewController: UIViewController {
             enterButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             enterButton.heightAnchor.constraint(equalToConstant: 50),
             enterButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-            enterButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16)
+            enterButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+            
+            enterFaceIdButton.topAnchor.constraint(equalTo: logIn.bottomAnchor, constant: 16),
+            enterFaceIdButton.heightAnchor.constraint(equalToConstant: 50),
+            enterFaceIdButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            enterFaceIdButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -82),
         ])
         
         contentView.subviews.last?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
